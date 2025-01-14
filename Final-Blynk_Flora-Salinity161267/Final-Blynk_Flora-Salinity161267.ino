@@ -47,10 +47,6 @@ void getSensorData(BLEAddress pAddress) {
     ESP.restart();
   }
 
-  printf("HELLO WORLD!!!")
-  char hello = "HELLO WORLD!!!"
-  printf("%s\n",hello.c_str());
-
   Serial.println("Connected to Flora");
 
   BLERemoteService* pRemoteService = pClient->getService(serviceUUID);
@@ -60,7 +56,7 @@ void getSensorData(BLEAddress pAddress) {
   }
 
   pRemoteCharacteristic = pRemoteService->getCharacteristic(uuid_write_mode);
-  uint8_t buf[2] = {0xA0, 0x1F}; // Request new data from Flora sensor
+  uint8_t buf[2] = {0xA0, 0x1F}; 
   pRemoteCharacteristic->writeValue(buf, 2, true);
 
   pRemoteCharacteristic = pRemoteService->getCharacteristic(uuid_sensor_data);
@@ -71,30 +67,26 @@ void getSensorData(BLEAddress pAddress) {
     ESP.restart();
   }
 
-  // Extract sensor data from the BLE payload
-  temp = (value[0] + value[1] * 256) / 10.0; // Temperature in Celsius
-  moisture = value[7]; // Soil moisture percentage
-  light = value[3] + value[4] * 256; // Light intensity (lux)
-  conductivity = value[8] + value[9] * 256; // Electrical conductivity (EC) in µS/cm
-  battery = value[15]; // Battery percentage
+  temp = (value[0] + value[1] * 256) / 10.0; 
+  moisture = value[7];
+  light = value[3] + value[4] * 256; 
+  conductivity = value[8] + value[9] * 256; 
+  battery = value[15];
 
-  // Salinity calculation from EC using a standard conversion
-  // Salinity (ppt) = EC (µS/cm) / 2 (assuming 1 EC = 0.5 Salinity in ppt)
   if (conductivity > 0) {
-    salinity = conductivity * 0.5; // Adjust this factor if necessary based on your system's calibration
+    salinity = conductivity * 0.5;
   } else {
     salinity = 0;
   }
 
-  // Print sensor data to Serial Monitor for debugging
-  Serial.println("\n-------------------- Sensor Data --------------------");
-  Serial.print("Temperature: "); Serial.println(temp);
-  Serial.print("Moisture: "); Serial.println(moisture);
-  Serial.print("Light: "); Serial.println(light);
-  Serial.print("Conductivity (EC): "); Serial.println(conductivity);
-  Serial.print("Battery: "); Serial.println(battery);
-  Serial.print("Salinity: "); Serial.println(salinity);
-  Serial.println("----------------------------------------------------\n");
+  // Show data in Serial Monitor
+  printf("\nHELLO WORLD DATA:");
+  printf("Temperature: "); printf(temp);
+  printf("Moisture: "); printf(moisture);
+  printf("Light: "); printf(light);
+  printf("Conductivity (EC): "); printf(conductivity);
+  printf("Battery: "); printf(battery);
+  printf("Salinity: "); printf(salinity);
 
   pClient->disconnect();
   btStop();
