@@ -1,7 +1,8 @@
 #include <NimBLEDevice.h>
 
 // กำหนด MAC Address ของ Flora Sensor
-const char* floraMacAddress = "5C:85:7E:B1:1B:20";
+// const char* floraMacAddress = "5C:85:7E:B1:1B:20";
+const char* floraMacAddress = "5C:85:7E:B1:19:B6";
 
 // UUID ของค่าต่างๆ ที่ต้องการอ่าน (ตัวอย่าง UUID)
 #define UUID_SERVICE "00001204-0000-1000-8000-00805f9b34fb" // UUID ของ service
