@@ -45,7 +45,11 @@ void getSensorData(BLEAddress pAddress) {
     Serial.println("Failed to connect. Restarting...");
     pClient->disconnect();
     ESP.restart();
-  } 
+  }
+
+  printf("HELLO WORLD!!!")
+  char hello = "HELLO WORLD!!!"
+  printf("%s\n",hello.c_str());
 
   Serial.println("Connected to Flora");
 
